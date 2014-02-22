@@ -28,7 +28,6 @@ class SteamConnectSpec(_system: ActorSystem) extends TestKit(_system)
     "properly login" in {
       val bot = system.actorOf(Props[SteamClient])
       bot ! ConnectToServer(Server("72.165.61.185", 27017))
-      expectMsg(30.seconds, "hello world")
     }
 
   }

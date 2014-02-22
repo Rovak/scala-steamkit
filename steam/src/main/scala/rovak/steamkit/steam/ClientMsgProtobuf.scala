@@ -1,10 +1,10 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.steam.language.EMsg
-import _root_.rovak.steamkit.steam.language.internal.MsgHdrProtoBuf
-import _root_.rovak.steamkit.types.JobID
-import _root_.rovak.steamkit.types.steamid.SteamID
-import _root_.rovak.steamkit.util.stream.{BinaryReader, BinaryWriter}
+import rovak.steamkit.steam.language.EMsg
+import rovak.steamkit.steam.language.internal.MsgHdrProtoBuf
+import rovak.steamkit.types.JobID
+import rovak.steamkit.types.steamid.SteamID
+import rovak.steamkit.util.stream.{BinaryReader, BinaryWriter}
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.util.Arrays
