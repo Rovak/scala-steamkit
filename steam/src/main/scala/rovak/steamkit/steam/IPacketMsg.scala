@@ -1,6 +1,6 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.steam.language.EMsg
+import rovak.steamkit.steam.language.EMsg
 
 /**
  * Represents a simple unified interface into client messages recieved from the network.

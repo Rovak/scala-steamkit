@@ -1,6 +1,6 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.util.stream.{BinaryReader, BinaryWriter}
+import rovak.steamkit.util.stream.{BinaryReader, BinaryWriter}
 import java.nio.charset.Charset
 
 /**

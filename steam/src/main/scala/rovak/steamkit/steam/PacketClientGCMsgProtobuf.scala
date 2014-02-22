@@ -1,8 +1,8 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.steam.language.EMsg
-import _root_.rovak.steamkit.steam.language.internal.{MsgGCHdrProtoBuf, ExtendedClientMsgHdr}
-import _root_.rovak.steamkit.util.stream.BinaryReader
+import rovak.steamkit.steam.language.EMsg
+import rovak.steamkit.steam.language.internal.{MsgGCHdrProtoBuf, ExtendedClientMsgHdr}
+import rovak.steamkit.util.stream.BinaryReader
 
 class PacketClientGCMsgProtobuf(msg: EMsg, val data: Array[Byte]) extends IPacketMsg {
 

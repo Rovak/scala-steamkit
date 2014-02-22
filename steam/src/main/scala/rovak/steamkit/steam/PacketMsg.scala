@@ -1,8 +1,8 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.steam.language.EMsg
-import _root_.rovak.steamkit.steam.language.internal.MsgHdr
-import _root_.rovak.steamkit.util.stream.BinaryReader
+import rovak.steamkit.steam.language.EMsg
+import rovak.steamkit.steam.language.internal.MsgHdr
+import rovak.steamkit.util.stream.BinaryReader
 
 /**
  * Represents a packet message with basic header information.

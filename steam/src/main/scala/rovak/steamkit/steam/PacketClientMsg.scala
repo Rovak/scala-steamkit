@@ -1,8 +1,8 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.steam.language.EMsg
-import _root_.rovak.steamkit.steam.language.internal.ExtendedClientMsgHdr
-import _root_.rovak.steamkit.util.stream.BinaryReader
+import rovak.steamkit.steam.language.EMsg
+import rovak.steamkit.steam.language.internal.ExtendedClientMsgHdr
+import rovak.steamkit.util.stream.BinaryReader
 //remove if not needed
 
 class PacketClientMsg(val msgType: EMsg, val data: Array[Byte])

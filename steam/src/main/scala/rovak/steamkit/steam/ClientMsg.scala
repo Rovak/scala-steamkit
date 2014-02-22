@@ -1,10 +1,10 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.steam.language.EMsg
-import _root_.rovak.steamkit.steam.language.internal.{ExtendedClientMsgHdr, ISteamSerializableMessage}
-import _root_.rovak.steamkit.types.JobID
-import _root_.rovak.steamkit.types.steamid.SteamID
-import _root_.rovak.steamkit.util.stream.{BinaryWriter, BinaryReader}
+import rovak.steamkit.steam.language.EMsg
+import rovak.steamkit.steam.language.internal.{ExtendedClientMsgHdr, ISteamSerializableMessage}
+import rovak.steamkit.types.JobID
+import rovak.steamkit.types.steamid.SteamID
+import rovak.steamkit.util.stream.{BinaryWriter, BinaryReader}
 import scala.collection.JavaConversions._
 import java.io.ByteArrayOutputStream
 import java.util

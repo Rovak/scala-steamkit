@@ -1,10 +1,10 @@
 package rovak.steamkit.steam
 
-import _root_.rovak.steamkit.steam.gc.IPacketGCMsg
-import _root_.rovak.steamkit.steam.language.EMsg
-import _root_.rovak.steamkit.steam.language.internal.{ExtendedClientMsgHdr, MsgGCHdr}
-import _root_.rovak.steamkit.types.JobID
-import _root_.rovak.steamkit.util.stream.BinaryReader
+import rovak.steamkit.steam.gc.IPacketGCMsg
+import rovak.steamkit.steam.language.EMsg
+import rovak.steamkit.steam.language.internal.{ExtendedClientMsgHdr, MsgGCHdr}
+import rovak.steamkit.types.JobID
+import rovak.steamkit.util.stream.BinaryReader
 
 class PacketClientGCMsg(msg: EMsg, val data: Array[Byte]) extends IPacketGCMsg {
 
