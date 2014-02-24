@@ -23,6 +23,7 @@ import rovak.steamkit.steam.msg.LogOnDetails
 import rovak.steamkit.steam.msg.OneTimePasswordDetails
 import akka.actor.Terminated
 import rovak.steamkit.steam.msg.MachineAuthDetails
+import org.rovak.steamclient.steam3.handlers.{MessageHandlerStack, FriendHandler, BotHandler}
 
 object TcpConn {
   val magic = 0x31305456
@@ -58,6 +59,8 @@ class Buffer(actor: ActorRef) {
     buffer.append(data)
     stored += data.length
 
+    println(data.length)
+
     if (waitingFor == -1) {
       val reader = new BinaryReader(data.toArray)
       waitingFor = reader.readInt()
@@ -72,7 +75,9 @@ class Buffer(actor: ActorRef) {
   }
 }
 
-class SteamClient extends Actor {
+class SteamClient extends MessageHandlerStack
+  with BotHandler
+  with FriendHandler {
 
   import Tcp._
   import context.dispatcher
@@ -157,26 +162,25 @@ class SteamClient extends Actor {
     ))
   }
 
-  def internalHandleMessage(message: IPacketMsg) = {
-    message.msgType match {
-      case EMsg.ChannelEncryptRequest =>
-        handleEncryptRequest(message)
-      case EMsg.ChannelEncryptResult =>
-        handleEncryptResult(message)
-        // TODO Login here
-      case EMsg.ClientLogOnResponse =>
-        handleLogOnResponse(message)
-      case EMsg.ClientUpdateMachineAuth =>
-        handleMachineAuthUpdate(message)
-      case EMsg.Multi =>
-        handleMulti(message)
-      case EMsg.ClientNewLoginKey =>
-        handleLoginKey(message)
-      case EMsg.ClientLoggedOff =>
-        handleLoggedOff(message)
-      case x => println("unmatched message handling", x, message, message.isProto)
-    }
+  def wrappedHandleMessage(message: IPacketMsg) = message.msgType match {
+    case EMsg.ChannelEncryptRequest =>
+      handleEncryptRequest(message)
+    case EMsg.ChannelEncryptResult =>
+      handleEncryptResult(message)
+      // TODO Login here
+    case EMsg.ClientLogOnResponse =>
+      handleLogOnResponse(message)
+    case EMsg.ClientUpdateMachineAuth =>
+      handleMachineAuthUpdate(message)
+    case EMsg.Multi =>
+      handleMulti(message)
+    case EMsg.ClientNewLoginKey =>
+      handleLoginKey(message)
+    case EMsg.ClientLoggedOff =>
+      handleLoggedOff(message)
+    case x => println("unmatched message handling", x, message, message.isProto)
   }
+
 
   /**
    * Sends a machine auth response.
@@ -468,13 +472,11 @@ class SteamClient extends Actor {
    */
   def beat() = send(new ClientMsgProtobuf[CMsgClientHeartBeat.Builder](classOf[CMsgClientHeartBeat], EMsg.ClientHeartBeat))
 
-  def receive = {
+  def wrappedReceive = {
     case ConnectToServer(server) =>
       connectToServer(server)
     case CommandFailed(_: Connect) ⇒
       context stop self
-    case steamLogin: SteamLogin =>
-      login(steamLogin)
     case c @ Connected(remote, local) =>
       connection = sender
       connection ! Register(self)
@@ -496,7 +498,5 @@ class SteamClient extends Actor {
       processReceivedData(new BinaryReader(data))
     case _: ConnectionClosed =>
       context stop self
-    case x =>
-      println("unhandled message: " + x)
   }
 }
